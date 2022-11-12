@@ -1,4 +1,4 @@
-package cn.cf.videoarchive.test;
+package cn.cf.videoarchive.test.daotest;
 
 import cn.cf.videoarchive.dao.UserDao;
 import cn.cf.videoarchive.dao.impl.UserDaoImpl;
@@ -6,7 +6,7 @@ import cn.cf.videoarchive.pojo.User;
 import org.junit.Test;
 
 public class UserDaoTest {
-    UserDao dao = new UserDaoImpl();
+    private UserDao dao = new UserDaoImpl();
     @Test
     public void testCountUser(){
         long i = dao.countUser();
@@ -43,5 +43,9 @@ public class UserDaoTest {
     public void testGetUserById(){
         User userById = dao.getUserById(1);
         System.out.println(userById);
+    }
+    @Test
+    public void testGetAll(){
+        System.out.println(dao.getAll());
     }
 }
