@@ -1,16 +1,16 @@
 <%--
   Created by IntelliJ IDEA.
   User: chemicalfiber
-  Date: 2022/11/9
-  Time: 10:53 下午
+  Date: 2022/11/13
+  Time: 8:54 下午
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>UP主视频存档系统</title>
+    <title>注册成功！</title>
 </head>
 <body>
-初始
+注册成功！即将转到<a href="login.jsp">登录</a>页面......
 </body>
 </html>

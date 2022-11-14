@@ -7,7 +7,7 @@ import cn.cf.videoarchive.service.impl.UserServiceImpl;
 import org.junit.Test;
 
 public class UserServiceTest {
-private UserService service = new UserServiceImpl();
+private final UserService service = new UserServiceImpl();
     @Test
     public void addUser() {
         User user = new User(null, "ctts", "测试用户2", "zhimakaimen", null);
@@ -31,11 +31,12 @@ private UserService service = new UserServiceImpl();
     @Test
     public void login() {
 //        User login = service.login(new User(null, "admin", null, "admin", null));
-        User login = service.login(new User(null, "admin", null, "haha", null));
+        User login = service.login(new User(null, "admin", null, "admin", null));
         if (login == null){
             System.out.println("登录失败！");
         }else {
             System.out.println("登录成功！");
+            System.out.println(login);
         }
     }
 

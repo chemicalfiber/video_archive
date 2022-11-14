@@ -8,7 +8,7 @@ import cn.cf.videoarchive.service.UserService;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    private UserDao dao = new UserDaoImpl();
+    private final UserDao dao = new UserDaoImpl();
     @Override
     public int addUser(User user) {
         return dao.addUser(user);
