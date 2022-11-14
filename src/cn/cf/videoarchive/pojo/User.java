@@ -5,7 +5,8 @@ public class User {
     private String u_name;  // 用户名
     private String u_nick_name; // 用户昵称
     private String u_password;  // 用户密码
-    private Integer u_grant;    // 用户角色身份
+    private Integer u_grant;    // 用户角色身份标识
+    private String g_name;    // 用户角色身份
 
     public User() {
     }
@@ -26,6 +27,7 @@ public class User {
                 ", u_nick_name='" + u_nick_name + '\'' +
                 ", u_password='" + u_password + '\'' +
                 ", u_grant=" + u_grant +
+                ", g_name='" + g_name + '\'' +
                 '}';
     }
 
@@ -67,5 +69,13 @@ public class User {
 
     public void setU_grant(Integer u_grant) {
         this.u_grant = u_grant;
+    }
+
+    public String getG_name() {
+        return g_name;
+    }
+
+    public void setG_name(String g_name) {
+        this.g_name = g_name;
     }
 }

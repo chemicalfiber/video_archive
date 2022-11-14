@@ -11,7 +11,7 @@
     <title>登录成功！</title>
 </head>
 <body>
-登录成功！欢迎${sessionScope.user.u_grant} ${sessionScope.user.u_nick_name}！<br>
+登录成功！欢迎${sessionScope.user.g_name} ${sessionScope.user.u_nick_name}！<br>
 正在回到<a href="${pageContext.request.contextPath}/">首页</a>......
 </body>
 </html>

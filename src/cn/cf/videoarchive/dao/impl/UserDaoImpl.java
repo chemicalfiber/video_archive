@@ -52,7 +52,7 @@ public class UserDaoImpl extends BaseDAO implements UserDao {
     @Override
     public User getUserByUsernameAndPassword(String username, String password) {
         // language=MySQL
-        String sql = "SELECT * FROM user WHERE u_name=? AND u_password=?";
+        String sql = "SELECT `user`.*, `grant`.g_name FROM `user`,`grant` WHERE u_name=? AND u_password=? AND user.u_grant=`grant`.g_id";
         return getOne(User.class,sql,username,password);
     }
 
@@ -64,7 +64,7 @@ public class UserDaoImpl extends BaseDAO implements UserDao {
     @Override
     public User getByUsername(String username) {
         // language=MySQL
-        String sql = "SELECT * FROM user WHERE u_name=?";
+        String sql = "SELECT `user`.*, `grant`.g_name FROM `user`,`grant` WHERE u_name=? AND user.u_grant=`grant`.g_id";
         return getOne(User.class,sql,username);
     }
 
@@ -75,7 +75,7 @@ public class UserDaoImpl extends BaseDAO implements UserDao {
     @Override
     public List<User> getAll() {
         // language=MySQL
-        String sql = "SELECT * FROM user";
+        String sql = "SELECT `user`.*, `grant`.g_name FROM `user`,`grant` where user.u_grant=`grant`.g_id";
         return getList(User.class,sql);
     }
 
@@ -87,7 +87,7 @@ public class UserDaoImpl extends BaseDAO implements UserDao {
     @Override
     public User getUserById(Integer id) {
         // language=MySQL
-        String sql = "SELECT * FROM user WHERE u_id=?";
+        String sql = "SELECT `user`.*, `grant`.g_name FROM `user`,`grant` WHERE u_id=? AND user.u_grant=`grant`.g_id";
         return getOne(User.class,sql,id);
     }
 
