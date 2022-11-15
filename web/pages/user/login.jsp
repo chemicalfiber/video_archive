@@ -1,4 +1,4 @@
-<%--
+<%@ page import="cn.cf.videoarchive.Const" %><%--
   Created by IntelliJ IDEA.
   User: chemicalfiber
   Date: 2022/11/13
@@ -11,6 +11,14 @@
     <title>用户登录</title>
 </head>
 <body>
-
+<form action="${pageContext.request.contextPath}/user?action=login" method="post">
+    <label>用户名：
+        <input type="text" name="username">
+    </label><br>
+    <label>密码：
+        <input type="password" name="password">
+    </label><br>
+    <input type="submit" value="登录">
+</form>
 </body>
 </html>

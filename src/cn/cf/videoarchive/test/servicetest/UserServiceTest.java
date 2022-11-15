@@ -1,6 +1,6 @@
 package cn.cf.videoarchive.test.servicetest;
 
-import cn.cf.videoarchive.Constants;
+import cn.cf.videoarchive.Const;
 import cn.cf.videoarchive.pojo.User;
 import cn.cf.videoarchive.service.UserService;
 import cn.cf.videoarchive.service.impl.UserServiceImpl;
@@ -23,7 +23,7 @@ private final UserService service = new UserServiceImpl();
 
     @Test
     public void updateUser() {
-        User user = new User(8, "ctts", "测试用户23333", "mimacuowu", Constants.ADMIN);
+        User user = new User(8, "ctts", "测试用户23333", "mimacuowu", Const.ADMIN);
         int i = service.updateUser(user);
         System.out.println(i);
     }

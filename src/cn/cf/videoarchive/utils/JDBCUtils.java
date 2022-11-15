@@ -17,7 +17,7 @@ public class JDBCUtils {
     public static Connection getConnection() throws IOException, ClassNotFoundException, SQLException {
         // 读取配置文件中的4个基本信息（url、user、password、driverClass）
         // 需要写出配置文件的详细路径，从src目录开始
-        InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("cn/cf/videoarchive/jdbc.properties");
+        InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream("cn/cf/videoarchive/jdbc.properties");
 
         Properties pros = new Properties();
         pros.load(is);

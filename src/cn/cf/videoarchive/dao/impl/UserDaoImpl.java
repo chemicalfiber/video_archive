@@ -1,6 +1,6 @@
 package cn.cf.videoarchive.dao.impl;
 
-import cn.cf.videoarchive.Constants;
+import cn.cf.videoarchive.Const;
 import cn.cf.videoarchive.dao.UserDao;
 import cn.cf.videoarchive.pojo.User;
 
@@ -16,7 +16,7 @@ public class UserDaoImpl extends BaseDAO implements UserDao {
     public int addUser(User user) {
         //language=MySQL
         String sql = "INSERT INTO `user` VALUES(null,?,?,?,?)";
-        return update(sql, user.getU_name(), user.getU_nick_name(), user.getU_password(), Constants.AUDIENCE); // 默认新注册的用户是「观众」
+        return update(sql, user.getU_name(), user.getU_nick_name(), user.getU_password(), Const.AUDIENCE); // 默认新注册的用户是「观众」
     }
 
     /**

@@ -1,6 +1,6 @@
 package cn.cf.videoarchive.servlets;
 
-import cn.cf.videoarchive.Constants;
+import cn.cf.videoarchive.Const;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -47,7 +47,7 @@ public class VerifyCodeGenerator extends HttpServlet {
             // 写验证码
             g.drawString(ch + "", width / 5 * i, height / 2);
         }
-        req.getSession().setAttribute(Constants.VERIFY_CODE, sb.toString());
+        req.getSession().setAttribute(Const.VERIFY_CODE, sb.toString());
         // g.drawString("a", 25, 35);
         // g.drawString("b", 30, 35);
         // g.drawString("D", 45, 35);

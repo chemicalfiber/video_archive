@@ -1,6 +1,6 @@
 package cn.cf.videoarchive.servlets;
 
-import cn.cf.videoarchive.Constants;
+import cn.cf.videoarchive.Const;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,9 +17,9 @@ import java.io.IOException;
 public class VerifyCodeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String verifyCode = (String) req.getSession().getAttribute(Constants.VERIFY_CODE);
+        String verifyCode = (String) req.getSession().getAttribute(Const.VERIFY_CODE);
         // 使session中的验证码立即失效！
-        req.getSession().removeAttribute(Constants.VERIFY_CODE);
+        req.getSession().removeAttribute(Const.VERIFY_CODE);
         // 为了保证验证码不区分大小写，所以将请求参数直接转大写处理
         String code = req.getParameter("code").toUpperCase();
         if (code.equals(verifyCode)) {
