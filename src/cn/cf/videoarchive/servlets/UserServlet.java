@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * 用户相关
@@ -21,7 +20,7 @@ public class UserServlet extends BaseServlet {
     private final UserService service = new UserServiceImpl();
 
     // 添加用户
-    public void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 获取Session中的验证码
         String verifyCode = (String) req.getSession().getAttribute(Const.VERIFY_CODE);
         // 让验证码失效，避免被重复使用
@@ -47,12 +46,20 @@ public class UserServlet extends BaseServlet {
                 req.getRequestDispatcher(req.getContextPath() + "/pages/user/register.jsp").forward(req, resp);
             } else {
                 // 默认注册的用户权限是「观众」，所以User构造方法权限填写null
-                int i = service.addUser(new User(null, username, nickname, password, null));
+                service.addUser(new User(null, username, nickname, password, null));
                 resp.sendRedirect(req.getContextPath() + "/pages/user/register_success.jsp");
             }
         } else {
             req.setAttribute(Const.ERR_MSG, "验证码错误！");
             req.getRequestDispatcher(req.getContextPath() + "/pages/user/register.jsp").forward(req, resp);
+        }
+    }
+
+    // 校验用户名是否重复
+    public void checkName(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = req.getParameter(Const.USERNAME);
+        if (service.existUsername(username)){
+            resp.getWriter().println("用户名已被占用！");
         }
     }
 
@@ -68,7 +75,9 @@ public class UserServlet extends BaseServlet {
                 return;
             }
             // TODO：更新用户信息
-//            service.updateUser();
+            // 昵称
+            // 密码
+            // 头像
         } else {
             req.setAttribute(Const.ERR_MSG, "您没有权限操作！");
             req.getRequestDispatcher("/pages/error.jsp").forward(req, resp);

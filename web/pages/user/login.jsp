@@ -1,4 +1,4 @@
-<%@ page import="cn.cf.videoarchive.Const" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: chemicalfiber
   Date: 2022/11/13
@@ -9,16 +9,25 @@
 <html>
 <head>
     <title>用户登录</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css">
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/user?action=login" method="post">
-    <label>用户名：
-        <input type="text" name="username">
-    </label><br>
-    <label>密码：
-        <input type="password" name="password">
-    </label><br>
-    <input type="submit" value="登录">
-</form>
+<div class="title"><img src="${pageContext.request.contextPath}/static/img/logo.png" alt="logo" style="height: 80px;width: 80px;"/><span>UP主视频存档系统</span></div>
+<div class="content">
+    <div class="inputBlock">
+        <span style="color: red">${requestScope.err_msg}</span>
+        <form action="${pageContext.request.contextPath}/user?action=login" method="post">
+            <label><span>用户名：</span>
+                <input type="text" name="username" placeholder="输入用户名" required>
+            </label><br>
+            <label><span>密码：</span>
+                <input type="password" name="password" placeholder="在此处输入您的密码" required>
+            </label><br>
+            <input type="submit" value="登录" class="submit">
+        </form>
+        没有账户？去
+        <a href="${pageContext.request.contextPath}/pages/user/register.jsp">注册</a>
+    </div>
+</div>
 </body>
 </html>
