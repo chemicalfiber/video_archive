@@ -1,6 +1,7 @@
 package cn.cf.videoarchive.servlets;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.IOException;
 /**
  * 视频相关
  */
+@WebServlet("/video")
 public class VideoServlet extends BaseServlet{
     // 添加视频
     public void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,5 +23,15 @@ public class VideoServlet extends BaseServlet{
 
     // 分页查询
 
+    // 根据创作者查询
+    public void searchByCreator(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String creatorNickname = req.getParameter("creatorNickname");
+        System.out.println(creatorNickname);
+    }
+
     // 检视详情
+    public void watch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String v_id = req.getParameter("v_id");
+        System.out.println(v_id);
+    }
 }
