@@ -5,9 +5,8 @@ import cn.cf.videoarchive.dao.impl.VideoDaoImpl;
 import cn.cf.videoarchive.pojo.Video;
 import org.junit.Test;
 
+import java.sql.Date;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class VideoDaoTest {
 private final VideoDao dao = new VideoDaoImpl();
@@ -19,13 +18,13 @@ private final VideoDao dao = new VideoDaoImpl();
 
     @Test
     public void countVideo() {
-        Long aLong = dao.countVideo();
+        Integer aLong = dao.countVideo();
         System.out.println(aLong);
     }
 
     @Test
     public void countVideoByCreator() {
-        Long aLong = dao.countVideoByCreator(2);
+        Integer aLong = dao.countVideoByCreator(2);
         System.out.println(aLong);
     }
 
@@ -44,4 +43,57 @@ private final VideoDao dao = new VideoDaoImpl();
         }
     }
 
+    @Test
+    public void testAdd(){
+        Video video = new Video(null, 2, "化学纤维", "ceshi", "ceshishipin", "ceshi", "ceshifengmian", "ceshilianjie", new Date(new java.util.Date().getTime()), "no");
+        int add = dao.add(video);
+        System.out.println(add);
+    }
+
+    @Test
+    public void testDelete(){
+        int delete = dao.delete(34);
+        System.out.println(delete);
+    }
+
+    @Test
+    public void testEdit(){
+        Video video = new Video(33, 2, "化学纤维", "ceshi", "ceshishipin", "ceshi", "ceshifengmian", "ceshilianjie", new Date(new java.util.Date().getTime()), "no");
+        int edit = dao.edit(video);
+        System.out.println(edit);
+    }
+
+    @Test
+    public void testGetAll(){
+        for (Video video : dao.getAll()) {
+            System.out.println(video);
+            System.out.println("-------------------");
+        }
+    }
+
+    @Test
+    public void testPage(){
+        for (Video video : dao.page(0, 5)) {
+            System.out.println(video);
+        }
+    }
+
+    @Test
+    public void testPageByTitle(){
+        for (Video video : dao.pageByTitle("骚操作", 0, 5)) {
+            System.out.println(video);
+        }
+    }
+
+    @Test
+    public void testPageByCreatorId(){
+        for (Video video : dao.pageByCreatorId(2, 0, 5)) {
+            System.out.println(video);
+        }
+    }
+
+    @Test
+    public void testCountVideoByTitle(){
+        System.out.println(dao.countVideoByTitle("骚操作"));
+    }
 }

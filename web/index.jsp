@@ -12,10 +12,6 @@
     <title>UP主视频存档系统</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css">
     <style>
-        .content {
-            background-color: azure;
-        }
-
         .videoItem {
             float: left;
             margin-left: 50px;

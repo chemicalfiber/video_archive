@@ -13,7 +13,6 @@ public class Video {
     private String v_play_link; // 视频可直接播放地址（网络或本地）
     private Date v_publication_date;    // 视频发布时间
     private String v_bili_link; // 哔哩哔哩视频链接
-    private String v_yt_link;   // YouTube视频链接
 
     @Override
     public String toString() {
@@ -28,7 +27,6 @@ public class Video {
                 ", v_play_link='" + v_play_link + '\'' +
                 ", v_publication_date=" + v_publication_date +
                 ", v_bili_link='" + v_bili_link + '\'' +
-                ", v_yt_link='" + v_yt_link + '\'' +
                 '}';
     }
 
@@ -112,15 +110,8 @@ public class Video {
         this.v_bili_link = v_bili_link;
     }
 
-    public String getV_yt_link() {
-        return v_yt_link;
-    }
 
-    public void setV_yt_link(String v_yt_link) {
-        this.v_yt_link = v_yt_link;
-    }
-
-    public Video(Integer v_id, Integer v_creator_id, String u_nick_name, String v_title, String v_introduction, String v_type, String v_thumbnail, String v_play_link, Date v_publication_date, String v_bili_link, String v_yt_link) {
+    public Video(Integer v_id, Integer v_creator_id, String u_nick_name, String v_title, String v_introduction, String v_type, String v_thumbnail, String v_play_link, Date v_publication_date, String v_bili_link) {
         this.v_id = v_id;
         this.v_creator_id = v_creator_id;
         this.u_nick_name = u_nick_name;
@@ -131,7 +122,6 @@ public class Video {
         this.v_play_link = v_play_link;
         this.v_publication_date = v_publication_date;
         this.v_bili_link = v_bili_link;
-        this.v_yt_link = v_yt_link;
     }
 
     public Video() {

@@ -8,7 +8,7 @@ import java.util.List;
  * @param <T> 是具体的模块的javaBean类
  */
 public class Page<T> {
-    public static final Integer PAGE_SIZE = 4;  // 默认每页显示的数量
+    public static final Integer PAGE_SIZE = 10;  // 默认每页显示的数量
     private Integer pageNo;    // 当前页码
     private Integer pageTotal;    // 总页码
     private Integer pageSize = PAGE_SIZE;    // 当前页显示数量

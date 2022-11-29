@@ -25,8 +25,8 @@ public class VideoServlet extends BaseServlet{
 
     // 根据创作者查询
     public void searchByCreator(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String creatorNickname = req.getParameter("creatorNickname");
-        System.out.println(creatorNickname);
+        String creatorId = req.getParameter("creatorId");
+        System.out.println(creatorId);
     }
 
     // 检视详情

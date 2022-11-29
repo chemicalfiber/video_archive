@@ -69,7 +69,7 @@
         <div class="videoType">
             🌐分区：
             <br>
-            <span>知识-野生技能协会</span>
+            <span>知识</span>
         </div>
         <div class="videoPublicationDate">
             🗓️发布日期：2022-11-4
@@ -78,11 +78,6 @@
             ⏩哔哩哔哩播放链接：
             <br>
             <a href="https://www.bilibili.com/video/BV1id4y1c7xM/" target="_blank">https://www.bilibili.com/video/BV1id4y1c7xM/</a>
-        </div>
-        <div class="yt_link">
-            ⏩YouTube播放链接：
-            <br>
-            <a href="#">暂无</a>
         </div>
         <div class="videoIntroduction">
             视频简介：
@@ -99,7 +94,7 @@
 </body>
 <script>
     function searchCreatorVideos() {
-        location.href="${pageContext.request.contextPath}/video?action=searchByCreator&creatorNickname=" + "化学纤维";
+        location.href="${pageContext.request.contextPath}/video?action=searchByCreator&creatorId=" + "2";
     }
 </script>
 </html>

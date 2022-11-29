@@ -13,7 +13,9 @@ public class VideoDaoImpl extends BaseDAO implements VideoDao {
      */
     @Override
     public int add(Video video) {
-        return 0;
+        // language=MySQL
+        String sql = "INSERT INTO video VALUES(null,?,?,?,?,?,?,DATE(NOW()),?)";
+        return update(sql,video.getV_creator_id(),video.getV_title(),video.getV_introduction(),video.getV_type(),video.getV_thumbnail(),video.getV_play_link(), video.getV_bili_link());
     }
 
     /**
@@ -23,7 +25,9 @@ public class VideoDaoImpl extends BaseDAO implements VideoDao {
      */
     @Override
     public int delete(Integer videoId) {
-        return 0;
+        // language=MySQL
+        String sql = "DELETE FROM video WHERE v_id=?";
+        return update(sql,videoId);
     }
 
     /**
@@ -33,7 +37,16 @@ public class VideoDaoImpl extends BaseDAO implements VideoDao {
      */
     @Override
     public int edit(Video video) {
-        return 0;
+        // language=MySQL
+        String sql = "update video SET v_creator_id=?,v_title=?,v_introduction=?,v_type=?,v_thumbnail=?,v_play_link=?,v_bili_link=? WHERE v_id=?";
+        return update(sql,video.getV_creator_id(),video.getV_title(),video.getV_introduction(),video.getV_type(),video.getV_thumbnail(),video.getV_play_link(), video.getV_bili_link(),video.getV_id());
+    }
+
+    @Override
+    public List<Video> getAll() {
+        // language=MySQL
+        String sql = "SELECT video.*,`user`.u_nick_name FROM video,`user` WHERE video.v_creator_id=`user`.u_id ORDER BY video.v_publication_date DESC";
+        return getList(Video.class,sql);
     }
 
     /**
@@ -77,11 +90,11 @@ public class VideoDaoImpl extends BaseDAO implements VideoDao {
      * @return 视频总数
      */
     @Override
-    public Long countVideo() {
+    public Integer countVideo() {
         // language=MySQL
         String sql = "SELECT count(*) FROM video";
-        Object value = getValue(sql);
-        return (Long) value;
+        Object value = getValue(sql);   // 此object是java.lang.Long类型
+        return Integer.parseInt(value.toString());
     }
 
     /**
@@ -90,10 +103,64 @@ public class VideoDaoImpl extends BaseDAO implements VideoDao {
      * @return 指定的创作者的视频总数
      */
     @Override
-    public Long countVideoByCreator(Integer creatorId) {
+    public Integer countVideoByCreator(Integer creatorId) {
         // language=MySQL
         String sql = "SELECT count(*) FROM video WHERE v_creator_id=?";
         Object value = getValue(sql,creatorId);
-        return (Long) value;
+        return Integer.parseInt(value.toString());
+    }
+
+    /**
+     * 查询指定标题的视频总数
+     * @param videoTitle 视频的标题
+     * @return 指定的标题的视频总数
+     */
+    @Override
+    public Integer countVideoByTitle(String videoTitle) {
+        // language=MySQL
+        String sql = "SELECT count(*) FROM video WHERE v_title LIKE ?";
+        Object value = getValue(sql,"%"+videoTitle+"%");
+        return Integer.parseInt(value.toString());
+    }
+
+    /**
+     * 分页查询所有视频
+     * @param begin 开始查找的索引号
+     * @param pageSize 每页显示的项目个数
+     * @return 包含多个视频类实例化对象的集合
+     */
+    @Override
+    public List<Video> page(Integer begin, Integer pageSize) {
+        // language=MySQL
+        String sql = "SELECT video.*,`user`.u_nick_name FROM video,`user` WHERE video.v_creator_id=`user`.u_id ORDER BY video.v_publication_date DESC LIMIT ?,?";
+        return getList(Video.class,sql,begin,pageSize);
+    }
+
+    /**
+     * 根据视频标题模糊分页查询
+     * @param videoTitle 视频的标题
+     * @param begin 开始查找的索引号
+     * @param pageSize 每页显示的项目个数
+     * @return 包含多个视频类实例化对象的集合
+     */
+    @Override
+    public List<Video> pageByTitle(String videoTitle, Integer begin, Integer pageSize) {
+        // language=MySQL
+        String sql = "SELECT video.*, `user`.u_nick_name FROM `user`,video WHERE `user`.u_id=video.v_creator_id AND video.v_title LIKE ? LIMIT ?,?";
+        return getList(Video.class,sql,"%"+videoTitle+"%",begin,pageSize);
+    }
+
+    /**
+     * 根据创作者ID分页查询视频
+     * @param creatorId 创作者ID
+     * @param begin 开始查找的索引号
+     * @param pageSize 每页显示的项目个数
+     * @return 包含多个视频类实例化对象的集合
+     */
+    @Override
+    public List<Video> pageByCreatorId(Integer creatorId, Integer begin, Integer pageSize) {
+        // language=MySQL
+        String sql = "SELECT video.*, `user`.u_nick_name FROM `user`,video WHERE `user`.u_id=video.v_creator_id AND video.v_creator_id=? LIMIT ?,?";
+        return getList(Video.class,sql,creatorId,begin,pageSize);
     }
 }
