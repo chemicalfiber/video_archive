@@ -45,6 +45,16 @@ public class VideoServiceImpl implements VideoService {
     }
 
     /**
+     * 通过ID查询视频
+     * @param videoId 视频的ID
+     * @return 视频类实例化对象
+     */
+    @Override
+    public Video getVideoById(Integer videoId){
+        return dao.getVideoById(videoId);
+    }
+
+    /**
      * 获取所有视频
      *
      * @return 包含多个视频类实例化对象的集合
@@ -60,7 +70,7 @@ public class VideoServiceImpl implements VideoService {
      * @return 视频总数
      */
     @Override
-    public long countVideos() {
+    public int countVideos() {
         return dao.countVideo();
     }
 
@@ -71,8 +81,18 @@ public class VideoServiceImpl implements VideoService {
      * @return 指定创作者的视频总数
      */
     @Override
-    public long countVideoByCreatorId(Integer creatorId) {
+    public int countVideoByCreatorId(Integer creatorId) {
         return dao.countVideoByCreator(creatorId);
+    }
+
+    /**
+     * 统计指定标题的视频总数
+     * @param title 视频的标题
+     * @return 指定标题的视频个数
+     */
+    @Override
+    public int countVideoByTitle(String title) {
+        return dao.countVideoByTitle(title);
     }
 
     /**

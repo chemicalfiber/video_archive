@@ -74,4 +74,9 @@ public class VideoServiceTest {
     public void pageByCreatorId() {
         System.out.println(service.pageByCreatorId(2, 0, 5));
     }
+
+    @Test
+    public void testCountVideoByTitle(){
+        System.out.println(service.countVideoByTitle("骚操作"));
+    }
 }

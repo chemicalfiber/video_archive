@@ -14,7 +14,7 @@ public class VideoDaoImpl extends BaseDAO implements VideoDao {
     @Override
     public int add(Video video) {
         // language=MySQL
-        String sql = "INSERT INTO video VALUES(null,?,?,?,?,?,?,DATE(NOW()),?)";
+        String sql = "INSERT INTO video VALUES(null,?,?,?,?,?,?,CURDATE(),?)";
         return update(sql,video.getV_creator_id(),video.getV_title(),video.getV_introduction(),video.getV_type(),video.getV_thumbnail(),video.getV_play_link(), video.getV_bili_link());
     }
 
