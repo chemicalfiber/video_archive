@@ -1,8 +1,10 @@
 package cn.cf.videoarchive.servlets;
 
+import cn.cf.videoarchive.pojo.Page;
 import cn.cf.videoarchive.pojo.Video;
 import cn.cf.videoarchive.service.VideoService;
 import cn.cf.videoarchive.service.impl.VideoServiceImpl;
+import cn.cf.videoarchive.utils.WebUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +34,19 @@ public class VideoServlet extends BaseServlet{
 
     // 分页查询
     public void page(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("视频分页");
+        // 获取请求的参数 pageNo 和 pageSize
+        int pageNo = WebUtils.parseInt(req.getParameter("pageNo"), 1);
+        int pageSize = WebUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
+        // 调用service中的分页方法
+        Page<Video> page = service.page(pageNo,pageSize);
 
+        page.setUrl("/video?action=page");
+
+        // 保存Page对象到Request域中
+        req.setAttribute("page",page);
+        // 请求转发到pages/manager/book_manager.jsp页面
+        req.getRequestDispatcher(req.getContextPath()+"/index.jsp").forward(req,resp);
     }
 
     // 根据创作者查询

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/manager/user")
+@WebServlet("/admin/user")
 public class AdminServlet extends BaseServlet {
     private final UserService service = new UserServiceImpl();
     // 删除用户
@@ -27,7 +27,7 @@ public class AdminServlet extends BaseServlet {
         if (loginUser != null && loginUser.getU_grant() == Const.ADMIN) {
             List<User> all = service.getAll();
             req.setAttribute("userList",all);
-            req.getRequestDispatcher("/manager/user_list.jsp").forward(req,resp);
+            req.getRequestDispatcher("/pages/admin/user_list.jsp").forward(req,resp);
         } else {
             req.setAttribute(Const.ERR_MSG, "您没有权限操作！");
             req.getRequestDispatcher("/pages/error.jsp").forward(req, resp);
