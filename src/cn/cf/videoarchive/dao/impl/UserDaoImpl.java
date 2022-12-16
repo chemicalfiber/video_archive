@@ -3,6 +3,7 @@ package cn.cf.videoarchive.dao.impl;
 import cn.cf.videoarchive.Const;
 import cn.cf.videoarchive.dao.UserDao;
 import cn.cf.videoarchive.pojo.User;
+import cn.cf.videoarchive.pojo.Video;
 
 import java.util.List;
 
@@ -96,10 +97,23 @@ public class UserDaoImpl extends BaseDAO implements UserDao {
      * @return 用户总个数
      */
     @Override
-    public Long countUser() {
+    public Integer countUser() {
         // language=MySQL
         String sql = "SELECT count(*) FROM user";
         Object value = getValue(sql);
-        return (Long) value;
+        return Integer.parseInt(value.toString());
+    }
+
+    /**
+     * 分页查询用户
+     * @param begin 分页起始索引号
+     * @param pageSize 页码
+     * @return 包含多个User实体类实例化对象的集合
+     */
+    @Override
+    public List<User> page(int begin, int pageSize) {
+        // language=MySQL
+        String sql = "SELECT video.*,`user`.u_nick_name FROM video,`user` WHERE video.v_creator_id=`user`.u_id ORDER BY video.v_publication_date DESC LIMIT ?,?";
+        return getList(User.class,sql,begin,pageSize);
     }
 }

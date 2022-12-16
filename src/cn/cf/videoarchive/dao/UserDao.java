@@ -20,5 +20,7 @@ public interface UserDao {
     // 查询一个
     User getUserById(Integer id);
     // 查询总个数
-    Long countUser();
+    Integer countUser();
+
+    List<User> page(int begin, int pageSize);
 }

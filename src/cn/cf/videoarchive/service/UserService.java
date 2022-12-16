@@ -1,5 +1,6 @@
 package cn.cf.videoarchive.service;
 
+import cn.cf.videoarchive.pojo.Page;
 import cn.cf.videoarchive.pojo.User;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface UserService {
     List<User> getAll();
     // 查询总个数
     long countUser();
+    // 分页查询用户
+    Page<User> page(int pageNo, int pageSize);
 }

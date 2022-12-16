@@ -1,15 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
-  User: chemicalfiber
-  Date: 2022/11/15
-  Time: 9:30 上午
+  User: ChemicalFiber
+  Date: 2022/12/16
+  Time: 21:18
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>用户管理-超级管理员后台</title>
+    <title>编辑用户-超级管理员后台</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css">
 
 </head>
@@ -23,10 +22,8 @@
 </div>
 <div class="content">
     <div class="userList">
-        <!--TODO:超级管理员的用户管理页面-->
-        <c:forEach var="user" items="${requestScope.page.items}">
+        <!--TODO:超级管理员的用户编辑页面，提升用户权限，重置用户密码-->
 
-        </c:forEach>
     </div>
 </div>
 </body>

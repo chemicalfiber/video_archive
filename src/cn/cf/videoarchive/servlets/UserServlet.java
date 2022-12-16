@@ -58,7 +58,7 @@ public class UserServlet extends BaseServlet {
     // 校验用户名是否重复
     public void checkName(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter(Const.USERNAME);
-        if (service.existUsername(username)){
+        if (service.existUsername(username)) {
             resp.getWriter().println("用户名已被占用！");
         }
     }
@@ -67,21 +67,31 @@ public class UserServlet extends BaseServlet {
     public void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 记得校验权限，只有管理员或者账户拥有者才可以修改用户
         User loginUser = (User) req.getSession().getAttribute(Const.LOGIN_USER);
-        if (loginUser != null && loginUser.getU_grant() == Const.ADMIN) {
-            int id = Integer.parseInt(req.getParameter("id"));
-            if (loginUser.getU_id() != id) { // 判断是不是账户拥有者
-                req.setAttribute(Const.ERR_MSG, "您没有权限操作！");
-                req.getRequestDispatcher("/pages/error.jsp").forward(req, resp);
-                return;
-            }
-            // TODO：更新用户信息
-            // 昵称
-            // 密码
-            // 头像
-        } else {
+        // 获取要修改的用户的id
+        int id = Integer.parseInt(req.getParameter("id"));
+
+        // 用户不能为空
+        if (loginUser == null) {
             req.setAttribute(Const.ERR_MSG, "您没有权限操作！");
-            req.getRequestDispatcher("/pages/error.jsp").forward(req, resp);
+            req.getRequestDispatcher(req.getContextPath() + "/user/login.jsp").forward(req, resp);
+            return;
         }
+        // 判断是不是管理员在操作
+        if (loginUser.getU_grant() != Const.ADMIN) {
+            req.setAttribute(Const.ERR_MSG, "您没有权限操作！");
+            req.getRequestDispatcher(req.getContextPath() + "/user/login.jsp").forward(req, resp);
+            return;
+        }
+        // 判断是不是账户拥有者
+        if (loginUser.getU_id() != id) {
+            req.setAttribute(Const.ERR_MSG, "您没有权限操作！");
+            req.getRequestDispatcher(req.getContextPath() + "/user/login.jsp").forward(req, resp);
+            return;
+        }
+        // TODO：更新用户信息
+
+        // 昵称
+        // 密码
     }
 
     // 登录

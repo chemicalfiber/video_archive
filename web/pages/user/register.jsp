@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css">
 </head>
 <body>
-<div class="title"><img src="${pageContext.request.contextPath}/static/img/logo.png" alt="logo" style="height: 80px;width: 80px;"/><span>UP主视频存档系统</span></div>
+<div class="title"><img src="${pageContext.request.contextPath}/static/img/logo.png" alt="logo" style="cursor:pointer;height: 80px;width: 80px;" onclick="location.href='${pageContext.request.contextPath}/'"/><span>UP主视频存档系统</span></div>
 <div class="content">
     <div class="inputBlock">
         <span style="color: red" id="err_msg">${requestScope.err_msg}</span>

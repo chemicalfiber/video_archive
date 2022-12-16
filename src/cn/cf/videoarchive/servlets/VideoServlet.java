@@ -24,12 +24,12 @@ public class VideoServlet extends BaseServlet{
     }
     // 删除视频
     public void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        // TODO:删除视频前，校验身份，只有自己才能删除自己的视频
     }
 
     // 修改视频
     public void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        // TODO：更新视频前校验身份，只有自己才能修改自己的视频
     }
 
     // 分页查询
@@ -45,7 +45,7 @@ public class VideoServlet extends BaseServlet{
 
         // 保存Page对象到Request域中
         req.setAttribute("page",page);
-        // 请求转发到pages/manager/book_manager.jsp页面
+        // 请求转发到index.jsp页面
         req.getRequestDispatcher(req.getContextPath()+"/index.jsp").forward(req,resp);
     }
 

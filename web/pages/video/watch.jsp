@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>视频播放页面</title>
@@ -49,8 +50,7 @@
 <div class="title">
     <img src="${pageContext.request.contextPath}/static/img/logo.png" alt="logo"
          style="height: 80px;width: 80px;"/><span>UP主视频存档系统</span>
-    <span class="userConsole">您好，请<a
-            href="${pageContext.request.contextPath}/pages/user/login.jsp">登录</a>以观看/上传视频</span>
+    <%@include file="/pages/includes/user_console.jsp"%>
 </div>
 <div class="content">
     <video controls>
