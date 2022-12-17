@@ -113,7 +113,7 @@ public class UserDaoImpl extends BaseDAO implements UserDao {
     @Override
     public List<User> page(int begin, int pageSize) {
         // language=MySQL
-        String sql = "SELECT video.*,`user`.u_nick_name FROM video,`user` WHERE video.v_creator_id=`user`.u_id ORDER BY video.v_publication_date DESC LIMIT ?,?";
+        String sql = "SELECT `user`.*,`grant`.g_name FROM `user` ,`grant` WHERE `user`.u_grant=`grant`.g_id LIMIT ?,?";
         return getList(User.class,sql,begin,pageSize);
     }
 }

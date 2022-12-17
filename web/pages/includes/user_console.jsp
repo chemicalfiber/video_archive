@@ -16,13 +16,12 @@
                 </c:if>
 				<%--如果已经登录，则显示 登录 成功之后的用户信息。--%>
 				<c:if test="${not empty sessionScope.login_user}">
-                    <span>您好，${sessionScope.login_user.u_nick_name}，当前身份：${sessionScope.login_user.g_name}</span>
+                    <span>您好，${sessionScope.login_user.u_nick_name}【${sessionScope.login_user.g_name}】</span>
+                    <a href="${pageContext.request.contextPath}/pages/user/edit.jsp">修改个人信息</a> |
                     <c:if test="${sessionScope.login_user.u_grant == 2}">
-                        <!--TODO：创作者后台-->
                         <a href="${pageContext.request.contextPath}/pages/creator/video_list.jsp">视频管理</a>
                     </c:if>
                     <c:if test="${sessionScope.login_user.u_grant == 1}">
-                        <!--TODO：管理员后台-->
                         <a href="${pageContext.request.contextPath}/pages/admin/video_list.jsp">视频管理</a> |
                         <a href="${pageContext.request.contextPath}/pages/admin/user_list.jsp">用户管理</a>
                     </c:if>

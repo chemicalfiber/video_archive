@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-// TODO:完成视频访问过滤器
 @WebFilter(urlPatterns = {"/pages/video/*","/video"})
 public class VideoFilter extends HttpFilter {
     @Override

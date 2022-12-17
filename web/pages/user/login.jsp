@@ -18,7 +18,7 @@
         <span style="color: red">${requestScope.err_msg}</span>
         <form action="${pageContext.request.contextPath}/user?action=login" method="post">
             <label><span>用户名：</span>
-                <input type="text" name="username" placeholder="输入用户名" required>
+                <input type="text" name="username" placeholder="输入用户名" value="${requestScope.username}" required>
             </label><br>
             <label><span>密码：</span>
                 <input type="password" name="password" placeholder="在此处输入您的密码" required>

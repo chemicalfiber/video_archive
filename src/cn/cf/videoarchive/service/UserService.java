@@ -12,6 +12,8 @@ public interface UserService {
     int deleteUser(Integer id);
     // 修改用户
     int updateUser(User user);
+    // 查询一个用户
+    User findUserById(Integer id);
     // 登录
     User login(User user);
     // 检查用户名是否存在

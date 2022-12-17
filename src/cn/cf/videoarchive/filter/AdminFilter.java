@@ -13,8 +13,6 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = {"/admin/*", "/pages/admin/*"})
 public class AdminFilter extends HttpFilter {
-    // TODO：管理员相关过滤器
-
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         System.err.println("正在请求：" + request.getRequestURI());

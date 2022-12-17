@@ -146,7 +146,7 @@ public class VideoDaoImpl extends BaseDAO implements VideoDao {
     @Override
     public List<Video> pageByTitle(String videoTitle, Integer begin, Integer pageSize) {
         // language=MySQL
-        String sql = "SELECT video.*, `user`.u_nick_name FROM `user`,video WHERE `user`.u_id=video.v_creator_id AND video.v_title LIKE ? LIMIT ?,?";
+        String sql = "SELECT video.*, `user`.u_nick_name FROM `user`,video WHERE `user`.u_id=video.v_creator_id AND video.v_title LIKE ? ORDER BY video.v_publication_date DESC LIMIT ?,?";
         return getList(Video.class,sql,"%"+videoTitle+"%",begin,pageSize);
     }
 
@@ -160,7 +160,7 @@ public class VideoDaoImpl extends BaseDAO implements VideoDao {
     @Override
     public List<Video> pageByCreatorId(Integer creatorId, Integer begin, Integer pageSize) {
         // language=MySQL
-        String sql = "SELECT video.*, `user`.u_nick_name FROM `user`,video WHERE `user`.u_id=video.v_creator_id AND video.v_creator_id=? LIMIT ?,?";
+        String sql = "SELECT video.*, `user`.u_nick_name FROM `user`,video WHERE `user`.u_id=video.v_creator_id AND video.v_creator_id=? ORDER BY video.v_publication_date DESC LIMIT ?,?";
         return getList(Video.class,sql,creatorId,begin,pageSize);
     }
 }

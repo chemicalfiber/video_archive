@@ -18,10 +18,10 @@
         <span style="color: red" id="err_msg">${requestScope.err_msg}</span>
         <form action="${pageContext.request.contextPath}/user?action=register" method="post">
             <label><span>用户名：</span>
-                <input type="text" name="username" id="username" placeholder="输入用户名" required minlength="4" maxlength="16" onblur="checkUsername()">
+                <input type="text" name="username" id="username" placeholder="输入用户名" value="${requestScope.username}" required minlength="4" maxlength="16" onblur="checkUsername()">
             </label><br>
             <label><span>昵称：</span>
-                <input type="text" name="username" placeholder="输入昵称" required minlength="4" maxlength="16">
+                <input type="text" name="nickname" placeholder="输入昵称" value="${requestScope.nickname}" required minlength="4" maxlength="16">
             </label><br>
             <label><span>密码：</span>
                 <input type="password" name="password" placeholder="在此处输入您的密码" required minlength="8" maxlength="16">
@@ -30,7 +30,7 @@
                 <input type="password" name="passwordConfirm" placeholder="在此处确认您的密码" required minlength="8" maxlength="16">
             </label><br>
             <label><span>图片验证码：</span>
-                <input type="password" name="code" placeholder="输入右侧验证码图片内容" required style="width: 180px" maxlength="4" minlength="4">
+                <input type="text" name="code" placeholder="输入右侧验证码图片内容" required style="width: 180px" maxlength="4" minlength="4">
             </label>
             <img src="${pageContext.request.contextPath}/code.jpg" alt="验证码" id="code"
                  onclick="changeVerifyCode()" style="width: 165px;height: 50px; position:relative; top: 20px"/>

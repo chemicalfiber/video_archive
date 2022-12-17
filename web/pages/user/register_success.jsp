@@ -11,6 +11,11 @@
     <title>注册成功！</title>
 </head>
 <body>
-注册成功！即将转到<a href="login.jsp">登录</a>页面......
+注册成功！即将转到<a href="${pageContext.request.contextPath}/pages/user/login.jsp">登录</a>页面......
 </body>
+<script>
+    window.onload = setTimeout(function (){
+        location.href = "${pageContext.request.contextPath}/pages/user/login.jsp";
+    },3000);
+</script>
 </html>
