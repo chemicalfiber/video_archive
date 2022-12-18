@@ -69,17 +69,23 @@
             background: aquamarine;
         }
 
+        .addVideo{
+            width: 100px;
+            height: 50px;
+        }
     </style>
 </head>
 <body>
 <div class="title">
     <img src="${pageContext.request.contextPath}/static/img/logo.png" alt="logo"
-         style="cursor:pointer;height: 80px;width: 80px;" onclick="location.href='${pageContext.request.contextPath}/'"/><span>管理员后台-视频管理</span>
+         style="cursor:pointer;height: 80px;width: 80px;" onclick="location.href='${pageContext.request.contextPath}/'"/><span>创作者后台-视频管理</span>
     <%--    <span class="userConsole">您好，请<a href="pages/user/login.jsp">登录</a>以观看/上传视频</span>--%>
 
     <%@include file="/pages/includes/user_console.jsp" %>
 </div>
 <div class="content">
+    <button class="addVideo" onclick="location.href='${pageContext.request.contextPath}/pages/creator/video_add.jsp'">添加视频</button>
+
     <table class="videoListTable" border="1" cellspacing="0">
         <tr>
             <th class="videoList_title">标题</th>

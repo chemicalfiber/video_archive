@@ -22,7 +22,26 @@ public class VideoServlet extends BaseServlet{
     private final VideoService service = new VideoServiceImpl();
     // 添加视频
     public void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO:添加视频
+        User loginUser = (User) req.getSession().getAttribute(Const.LOGIN_USER);
+        if (loginUser.getU_grant() != Const.CREATOR){
+            System.err.println("当前用户身份是：" + loginUser.getG_name() + "，拒绝访问。");
+            req.setAttribute(Const.ERR_MSG,"您不是创作者，无权操作！");
+            req.getRequestDispatcher(req.getContextPath() + "/pages/user/login.jsp").forward(req,resp);
+            return;
+        }
+        String title = req.getParameter(Const.VIDEO_TITLE);
+        String introduction = req.getParameter(Const.VIDEO_INTRODUCTION);
+        String type = req.getParameter(Const.VIDEO_TYPE);
+        String thumbnail = req.getParameter(Const.VIDEO_THUMBNAIL);
+        String playLink = req.getParameter(Const.VIDEO_PLAY_LINK);
+        String biliLink = req.getParameter(Const.VIDEO_BILI_LINK);
+
+        Video video = new Video(null, loginUser.getU_id(), null, title, introduction, type, thumbnail, playLink, null, biliLink);
+        int rows = service.addVideo(video);
+        if (rows < 1){
+            System.err.println("添加视频失败！");
+        }
+        resp.sendRedirect(req.getContextPath() + "/pages/creator/video_list.jsp");
     }
     // 删除视频
     public void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -63,7 +82,63 @@ public class VideoServlet extends BaseServlet{
 
     // 修改视频
     public void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO：更新视频前校验身份，只有自己才能修改自己的视频
+        // 更新视频信息前校验身份，只有自己才能修改自己的视频
+        User loginUser = (User) req.getSession().getAttribute(Const.LOGIN_USER);
+        if (loginUser.getU_grant() != Const.CREATOR){
+            System.err.println("当前用户身份是：" + loginUser.getG_name() + "，拒绝访问。");
+            req.setAttribute(Const.ERR_MSG,"您不是创作者，无权操作！");
+            req.getRequestDispatcher(req.getContextPath() + "/pages/user/login.jsp").forward(req,resp);
+            return;
+        }
+        // 通过前端传过来的ID查找要修改的视频
+        int id = Integer.parseInt(req.getParameter("id"));
+        Video video = service.getVideoById(id);
+        if (video == null){
+            System.err.println("找不到id为【" + id + "】的视频！");
+            resp.sendRedirect(req.getContextPath() + "/pages/creator/video_list.jsp");
+            return;
+        }
+        boolean flag = false;   // 用来检验有没有必要修改数据库的flag
+        // 相关参数获取
+        String title = req.getParameter(Const.VIDEO_TITLE);
+        String introduction = req.getParameter(Const.VIDEO_INTRODUCTION);
+        String type = req.getParameter(Const.VIDEO_TYPE);
+        String thumbnail = req.getParameter(Const.VIDEO_THUMBNAIL);
+        String playLink = req.getParameter(Const.VIDEO_PLAY_LINK);
+        String biliLink = req.getParameter(Const.VIDEO_BILI_LINK);
+        // 检查有没有必要修改
+        if (!title.equals(video.getV_title())){
+            flag = true;
+            video.setV_title(title);
+        }
+        if (!introduction.equals(video.getV_introduction())){
+            flag = true;
+            video.setV_introduction(introduction);
+        }
+        if (!type.equals(video.getV_type())){
+            flag = true;
+            video.setV_type(type);
+        }
+        if (!thumbnail.equals(video.getV_thumbnail())){
+            flag = true;
+            video.setV_thumbnail(thumbnail);
+        }
+        if (!playLink.equals(video.getV_play_link())){
+            flag = true;
+            video.setV_play_link(playLink);
+        }
+        if (!biliLink.equals(video.getV_bili_link())){
+            flag = true;
+            video.setV_bili_link(biliLink);
+        }
+        // 检查修改flag
+        if (flag){
+            int rows = service.updateVideo(video);
+            if (rows < 1){
+                System.err.println("修改id为【" + id + "】的视频失败！");
+            }
+        }
+        resp.sendRedirect(req.getContextPath() + "/pages/creator/video_list.jsp");
     }
 
     // 分页查询
