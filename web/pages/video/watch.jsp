@@ -49,7 +49,7 @@
 <body>
 <div class="title">
     <img src="${pageContext.request.contextPath}/static/img/logo.png" alt="logo"
-         style="height: 80px;width: 80px;"/><span>UP主视频存档系统</span>
+         style="cursor:pointer;height: 80px;width: 80px;" onclick="location.href='${pageContext.request.contextPath}/'"/><span>UP主视频存档系统</span>
     <%@include file="/pages/includes/user_console.jsp"%>
 </div>
 <div class="content">
