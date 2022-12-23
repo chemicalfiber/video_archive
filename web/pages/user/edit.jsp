@@ -11,7 +11,7 @@
 <%
     if (request.getSession().getAttribute(Const.LOGIN_USER) == null){
         request.setAttribute(Const.ERR_MSG,"请先登录！");
-        request.getRequestDispatcher(request.getContextPath() + "/pages/user.login.jsp").forward(request,response);
+        request.getRequestDispatcher(request.getContextPath() + "/pages/user/login.jsp").forward(request,response);
         return;
     }
 %>

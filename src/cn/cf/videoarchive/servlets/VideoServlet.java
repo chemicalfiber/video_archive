@@ -162,6 +162,18 @@ public class VideoServlet extends BaseServlet{
     public void searchByCreator(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int creatorId = Integer.parseInt(req.getParameter("creatorId"));
         System.out.println("请求查询id为【" + creatorId + "】的创作者的所有视频");
+        // 获取请求的参数 pageNo 和 pageSize
+        int pageNo = WebUtils.parseInt(req.getParameter("pageNo"), 1);
+        int pageSize = WebUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
+        // 调用service中的分页方法
+        Page<Video> page = service.pageByCreatorId(creatorId,pageNo,pageSize);
+
+        page.setUrl("/video?action=searchByCreator&creatorId="+creatorId);
+
+        // 保存Page对象到Request域中
+        req.setAttribute(Const.PAGE,page);
+        // 请求转发到创作者视频管理页面
+        req.getRequestDispatcher(req.getContextPath()+"/index.jsp").forward(req,resp);
     }
     // 根据创作者分页查询视频
     public void pageByCreator(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
